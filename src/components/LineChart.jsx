@@ -33,15 +33,18 @@ const { Title } = Typography
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrice = [];
-
+const coinTimestamp = [];
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i+= 1) {
     coinPrice.push(coinHistory?.data?.history[i].price);
   }
 
- const coinTimestamp = [];
-  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString("en-US"));
+   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
+    coinTimestamp.push(
+      new Date(
+        coinHistory?.data?.history[i].timestamp * 1000
+      ).toLocaleDateString()
+    );
   }
 
   console.log(coinHistory)
@@ -76,7 +79,9 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
         <Col className="price-container">
           <Title level={5} className="price-change">Change: {coinHistory?.data?.change}%</Title>
           <Title level={5} className="current-price">Current {coinName} Price: $ {currentPrice}</Title>
+          <h6>30 minute increment </h6>
         </Col>
+
       </Row>
       <Line data={data} options={options} />
     </>
