@@ -7,13 +7,13 @@ import Cryptocurrencies from './Cryptocurrencies'
 import News from './News'
 import Loader from './Loader'
 
-
+// millify converts long numbers to human-readable strings.
 
 const { Title } = Typography
 
 const Homepage = () => {
 
-    const {data, isFetching } = useGetCryptosQuery(10);
+    const { data, isFetching } = useGetCryptosQuery(10);
     const globalStats = data?.data?.stats
 
     console.log(data)
